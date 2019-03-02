@@ -2,8 +2,6 @@ package it.univr.fsm.machine;
 
 import it.univr.fsm.equations.*;
 
-import org.apache.commons.lang3.StringUtils;
-
 import it.univr.exception.*;
 
 import it.univr.fsm.equations.Comp;
@@ -2180,7 +2178,7 @@ public class Automaton {
 
 		for (Transition t : this.getOutgoingTransitionsFrom(s)) {
 
-			if (StringUtils.isNumeric(t.getInput()) || ((t.getInput().equals("-") || t.getInput().equals("+")) && visited.size() == 1)) { 
+			if (isNumeric(t.getInput()) || ((t.getInput().equals("-") || t.getInput().equals("+")) && visited.size() == 1)) { 
 				HashSet<String> nexts = getMaximalPrefixNumber(t.getTo(), visited);
 
 				if (nexts.isEmpty()) 
@@ -2192,6 +2190,10 @@ public class Automaton {
 		}
 
 		return result;
+	}
+
+	private boolean isNumeric(String input) {
+		return input.matches("[0-9]");
 	}
 
 	/**
